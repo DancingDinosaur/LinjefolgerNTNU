@@ -99,6 +99,7 @@ void q(bool button) {
 }
 
 void triangle(bool button) {
+
   if (button == DOWN) {
     turning = 1;
     car.drive(maxSpeed, -maxSpeed);
@@ -117,9 +118,29 @@ void circle(bool button) {
     car.drive(0, 0);
 }
 
+bool squareSwitch = 1 
 void square(bool button) {
   if (button == DOWN) {
-    car.calibrateLine(lineColor);
-    lineMode = 1;
+    if squareSwitch{
+      car.calibrateLine(lineColor);
+      lineMode = 1;
+      squareSwitch = !squareSwitch
+    }
+    else if !squareSwitch{
+      lineMode = 0;
+      car.drive(0, 0);
+    }
   }
+}
+
+void obsAvoid {  // Avoids the obstacle in front. Spin 180 degrees on the spot
+  turning = 1;
+    car.drive(maxSpeed, -maxSpeed);
+    delay(550);
+    if(lineMode == 1){
+      car.drive(maxSpeed, maxSpeed);
+    }else{
+      car.drive(0, 0);
+    }
+    turning = 0;
 }
